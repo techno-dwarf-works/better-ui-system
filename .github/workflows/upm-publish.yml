@@ -31,7 +31,7 @@ jobs:
        id: convertString
        run: |
          # Define an array of strings to always convert to uppercase
-         UPPER_CASE_ARRAY=("ui" "id" "api") # Add other strings as needed
+         UPPER_CASE_ARRAY=("ui") # Add other strings as needed
         
          ORIGINAL_STRING="${{ steps.setOriginalString.outputs.originalString }}"
          IFS='-' read -ra PARTS <<< "$ORIGINAL_STRING"
