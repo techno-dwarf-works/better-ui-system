@@ -1,10 +1,10 @@
 {
-    "name": "{project_name}.Editor",
-    "rootNamespace": "Better.{short_project_name}.EditorAddons",
+    "name": "BetterUISystem.Editor",
+    "rootNamespace": "Better.UISystem.EditorAddons",
     "references": [
-        "GUID:443314a5a4e67c14a88ae223776b6554",
         "GUID:01df13aca8d01e24a911bcc3e8277031",
-        "GUID:6adbd2a12d24f5d429f7ea1b1086e835"
+        "GUID:6adbd2a12d24f5d429f7ea1b1086e835",
+        "GUID:dfef1d697f628474abe4fd3ceed9db56"
     ],
     "includePlatforms": [
         "Editor"

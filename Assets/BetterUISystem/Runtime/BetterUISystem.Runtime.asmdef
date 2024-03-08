@@ -1,6 +1,6 @@
 {
-    "name": "{project_name}.Runtime",
-    "rootNamespace": "Better.{short_project_name}.Runtime",
+    "name": "BetterUISystem.Runtime",
+    "rootNamespace": "Better.UISystem.Runtime",
     "references": [
         "GUID:01df13aca8d01e24a911bcc3e8277031"
     ],

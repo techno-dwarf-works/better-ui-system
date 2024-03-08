@@ -1,6 +1,6 @@
 {
-  "name": "com.tdw.better.{package_name}",
-  "displayName": "{display_name}",
+  "name": "com.tdw.better.uisystem",
+  "displayName": "Better UI System",
   "version": "0.0.1",
   "unity": "2021.3",
   "description": " ",
@@ -11,14 +11,16 @@
     "name": "Better Plugins",
     "url": "https://github.com/techno-dwarf-works"
   },
-  "changelogUrl": "https://github.com/techno-dwarf-works/{project_name}",
-  "documentationUrl": "https://github.com/techno-dwarf-works/{project_name}/tree/main#readme",
+  "changelogUrl": "https://github.com/techno-dwarf-works/better-ui-system",
+  "documentationUrl": "https://github.com/techno-dwarf-works/better-ui-system/tree/main#readme",
   "license": "MIT",
-  "licensesUrl":"https://github.com/techno-dwarf-works/{project_name}/blob/main/LICENSE",
+  "licensesUrl":"https://github.com/techno-dwarf-works/better-ui-system/blob/main/LICENSE",
   "keywords": [
-    "keyword1",
-    "keyword2",
-    "keyword2"
+    "ui",
+    "ui system",
+    "screen",
+    "popup",
+    "toast"
   ],
   "samples": [
     {
