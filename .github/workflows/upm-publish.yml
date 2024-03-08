@@ -17,27 +17,36 @@ on:
 
 jobs:
  convert_string:
-    name: Prepare String
-    runs-on: ubuntu-latest
-    outputs:
-      converted_string: ${{ steps.convertString.outputs.convertedString }}
-      
-    steps:
-      - name: Set the original string
-        id: setOriginalString
-        run: echo "::set-output name=originalString::${{ github.event.repository.name }}"
+   name: Prepare String
+   runs-on: ubuntu-latest
+   outputs:
+     converted_string: ${{ steps.convertString.outputs.convertedString }}
+    
+   steps:
+     - name: Set the original string
+       id: setOriginalString
+       run: echo "::set-output name=originalString::${{ github.event.repository.name }}"
 
-      - name: Convert string
-        id: convertString
-        run: |
-          ORIGINAL_STRING="${{ steps.setOriginalString.outputs.originalString }}"
-          IFS='-' read -ra PARTS <<< "$ORIGINAL_STRING"
-          RESULT=""
-          for PART in "${PARTS[@]}"; do
-            RESULT="${RESULT}$(echo "${PART^}")"
-          done
-          echo "::set-output name=convertedString::${RESULT}"
-          
+     - name: Convert string
+       id: convertString
+       run: |
+         # Define an array of strings to always convert to uppercase
+         UPPER_CASE_ARRAY=("ui" "id" "api") # Add other strings as needed
+        
+         ORIGINAL_STRING="${{ steps.setOriginalString.outputs.originalString }}"
+         IFS='-' read -ra PARTS <<< "$ORIGINAL_STRING"
+         RESULT=""
+         for PART in "${PARTS[@]}"; do
+           # Check if PART should be converted to uppercase
+           if [[ " ${UPPER_CASE_ARRAY[*]} " =~ " ${PART} " ]]; then
+             PART=${PART^^} # Convert to uppercase if in UPPER_CASE_ARRAY
+           else
+             PART=${PART^} # Capitalize the first letter otherwise
+           fi
+           RESULT="${RESULT}${PART}"
+         done
+         echo "::set-output name=convertedString::${RESULT}"
+
  prepare:
     needs: convert_string
     name: Prepare
