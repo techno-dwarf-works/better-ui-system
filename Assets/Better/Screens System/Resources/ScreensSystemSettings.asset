@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e773318ef724b96952016214029a321, type: 3}
+  m_Name: ScreensSystemSettings
+  m_EditorClassIdentifier: 
+  _defaultSequence:
+    rid: 1811633683213582342
+  _overridenSequences: []
+  _screenPrefabs:
+  - {fileID: 459805423877637680, guid: 40f372f5c7f32a54ca7ac99a4355617f, type: 3}
+  - {fileID: -7694273509857792546, guid: c7eb2551023d2d847b0432cdebb807c0, type: 3}
+  - {fileID: 4099784724423666501, guid: 0d67142bb917b6f428e65d5a64b7ef80, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 1811633683213582342
+      type: {class: SimpleScreensSequence, ns: Better.UISystem.Runtime.ScreensSystem.Sequences, asm: BetterUISystem.Runtime}

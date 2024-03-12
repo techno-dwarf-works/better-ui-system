@@ -1,10 +1,40 @@
 {
   "dependencies": {
+    "com.tdw.better.components": {
+      "version": "0.0.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.tdw.better.internal.core": "0.0.2"
+      },
+      "url": "https://package.openupm.com"
+    },
     "com.tdw.better.internal.core": {
       "version": "0.0.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
+    "com.tdw.better.projectsettings": {
+      "version": "0.0.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.tdw.better.singletons": "0.0.7",
+        "com.uurha.betterextensions": "1.5.3",
+        "com.tdw.better.internal.core": "0.0.2"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.tdw.better.singletons": {
+      "version": "0.0.7",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.uurha.betterextensions": "1.5.2",
+        "com.tdw.better.internal.core": "0.0.2"
+      },
       "url": "https://package.openupm.com"
     },
     "com.unity.collab-proxy": {
@@ -141,6 +171,57 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.uurha.betterattributes": {
+      "version": "3.0.12",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.uurha.bettereditortools": "1.5.24",
+        "com.tdw.better.internal.core": "0.0.2"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.uurha.betterdatastructures": {
+      "version": "0.1.7",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {
+        "com.tdw.better.internal.core": "0.0.2"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.uurha.bettereditortools": {
+      "version": "1.5.24",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.uurha.betterdatastructures": "0.1.7",
+        "com.uurha.betterextensions": "1.5.95",
+        "com.tdw.better.internal.core": "0.0.2"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.uurha.betterextensions": {
+      "version": "1.5.96",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.tdw.better.internal.core": "0.0.2"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.uurha.bettervalidation": {
+      "version": "1.5.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.uurha.bettereditortools": "1.5.22",
+        "com.tdw.better.internal.core": "0.0.2",
+        "com.tdw.better.projectsettings": "0.0.1",
+        "com.tdw.better.singletons": "0.0.7"
+      },
+      "url": "https://package.openupm.com"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
