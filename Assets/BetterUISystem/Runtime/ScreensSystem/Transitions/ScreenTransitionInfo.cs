@@ -13,7 +13,7 @@ namespace Better.UISystem.Runtime.ScreensSystem.Transitions
     {
         private readonly IScreenTransitionRunner _runner;
 
-        public IScreenTransitionRunner Runner => _runner;
+        protected IScreenTransitionRunner Runner => _runner;
 
         public Type SequenceType { get; private set; }
         public bool OverridenSequence { get; private set; }
@@ -40,7 +40,6 @@ namespace Better.UISystem.Runtime.ScreensSystem.Transitions
         where TPresenter : Screen<TModel>
         where TModel : ScreenModel
     {
-        public Type PresenterType => typeof(TPresenter);
         public TModel Model { get; }
 
         public bool AllowMultiInstance { get; private set; }

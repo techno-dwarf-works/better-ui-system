@@ -6,7 +6,7 @@
   "description": " ",
   "dependencies": {
     "com.tdw.better.internal.core": "0.0.2",
-    "com.uurha.betterextensions": "1.5.96",
+    "com.uurha.betterextensions": "1.5.97",
     "com.uurha.betterdatastructures": "0.1.7",
     "com.uurha.betterattributes": "3.0.11",
     "com.uurha.bettervalidation": "1.5.0",

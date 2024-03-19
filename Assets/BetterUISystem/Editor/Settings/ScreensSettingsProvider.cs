@@ -5,17 +5,17 @@ using UnityEditor;
 
 namespace Better.UISystem.EditorAddons.Settings
 {
-    public class ScreensSettingsProvider : DefaultProjectSettingsProvider<ScreensSystemSettings>
+    public class ScreenSettingsProvider : DefaultProjectSettingsProvider<ScreenSystemSettings>
     {
-        public ScreensSettingsProvider() : base(ScreensSystemSettings.Path)
+        public ScreenSettingsProvider() : base(ScreenSystemSettings.Path)
         {
             keywords = new[] { "screen", "ui", "ui system"};
         }
         
-        [MenuItem(ScreensSystemSettings.Path + "/" + PrefixConstants.HighlightPrefix, false, 999)]
+        [MenuItem(ScreenSystemSettings.Path + "/" + PrefixConstants.HighlightPrefix, false, 999)]
         private static void Highlight()
         {
-            SettingsService.OpenProjectSettings(ProjectPath + ScreensSystemSettings.Path);
+            SettingsService.OpenProjectSettings(ProjectPath + ScreenSystemSettings.Path);
         }
     }
 }

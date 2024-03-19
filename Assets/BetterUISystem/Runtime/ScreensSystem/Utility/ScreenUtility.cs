@@ -29,6 +29,20 @@ namespace Better.UISystem.Runtime.ScreensSystem.Utility
             return new ScreenSystem();
 #pragma warning restore CS0162
         }
+        
+        public static bool IsOpened<TPresenter, TModel>()
+            where TPresenter : Screen<TModel>
+            where TModel : ScreenModel
+        {
+            return GetSystem().IsOpened<TPresenter, TModel>();
+        }
+
+        public static bool TryGetOpened<TPresenter, TModel>(out TPresenter screen)
+            where TPresenter : Screen<TModel>
+            where TModel : ScreenModel
+        {
+            return GetSystem().TryGetOpened<TPresenter, TModel>(out screen);
+        }
 
         public static Task<TPresenter> OpenAsync<TPresenter, TModel>(TModel model, CancellationToken cancellationToken = default)
             where TPresenter : Screen<TModel>

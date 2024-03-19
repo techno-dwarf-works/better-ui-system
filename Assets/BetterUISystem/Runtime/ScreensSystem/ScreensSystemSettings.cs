@@ -18,9 +18,9 @@ using UnityEditor;
 namespace Better.UISystem.Runtime.ScreensSystem
 {
     [ScriptableCreate(Path)]
-    public class ScreensSystemSettings : ScriptableSettings<ScreensSystemSettings>
+    public class ScreenSystemSettings : ScriptableSettings<ScreenSystemSettings>
     {
-        public const string Path = PrefixConstants.BetterPrefix + "/" + "Screens System";
+        public const string Path = PrefixConstants.BetterPrefix + "/" + "Screen System";
         private readonly ScreensSequence _fallbackSequence = new SimpleScreensSequence();
 
         [Header("SETUP")] [Select] [SerializeReference]

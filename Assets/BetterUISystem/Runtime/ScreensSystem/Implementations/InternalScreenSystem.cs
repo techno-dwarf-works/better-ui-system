@@ -19,7 +19,7 @@ namespace Better.UISystem.Runtime.ScreensSystem
         private Dictionary<Type, IScreen> _screenPrefabMap;
         private IScreen _openedScreen;
         private readonly Queue<ScreenTransitionInfo> _transitionsQueue;
-        private readonly ScreensSystemSettings _settings;
+        private readonly ScreenSystemSettings _settings;
         private readonly Stack<HistoryInfo> _historyStack;
 
         public int HistoryCount => _historyStack.Count;
@@ -31,7 +31,7 @@ namespace Better.UISystem.Runtime.ScreensSystem
             Container = container;
             _transitionsQueue = new Queue<ScreenTransitionInfo>();
             _historyStack = new Stack<HistoryInfo>();
-            _settings = ScreensSystemSettings.Instance;
+            _settings = ScreenSystemSettings.Instance;
             CreateScreenPrefabMap();
         }
 

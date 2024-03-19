@@ -13,7 +13,6 @@ namespace Better.UISystem.Runtime.Common
         public bool Mutable { get; private set; }
 
         public CancellationToken CancellationToken => _tokenSource.Token;
-        public bool IsCancellationRequested => _tokenSource.IsCancellationRequested; // TODO: Add token support for operations 
 
         protected TransitionInfo(CancellationToken cancellationToken)
         {
@@ -45,16 +44,16 @@ namespace Better.UISystem.Runtime.Common
             return true;
         }
 
-        public bool Cancel()
+        public virtual bool Cancel()
         {
-            if (IsCancellationRequested)
-            {
-                return false;
-            }
-
             Mutable = false;
             _tokenSource.Cancel();
             return true;
+        }
+        
+        public virtual bool IsRelevant()
+        {
+            return !_tokenSource.IsCancellationRequested;
         }
 
         public string GetLogInfo()
@@ -68,7 +67,7 @@ namespace Better.UISystem.Runtime.Common
             var builder = new StringBuilder()
                 .AppendFormat("{0}:{1}", nameof(Mutable), Mutable.ToString())
                 .AppendLine()
-                .AppendFormat("{0}:{1}", nameof(IsCancellationRequested), IsCancellationRequested.ToString());
+                .AppendFormat("{0}:{1}", nameof(IsRelevant), IsRelevant().ToString());
 
             return builder;
         }
