@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Better.UISystem.Runtime.PopupsSystem.Interfaces;
 using UnityEngine;
 
 namespace Better.UISystem.Runtime
 {
-    [Serializable]
-    public class SimplePopupsSequence : PopupsSequence
+    public class SimpleModalSequence : ModalSequence
     {
-        // TODO: Add cancellation tokens handling
-
         public override async Task DoPlay(IPopup from, IPopup to)
         {
             if (from == null && to == null)

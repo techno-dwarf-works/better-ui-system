@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Better.Extensions.Runtime;
-using Better.UISystem.Runtime.PopupsSystem;
 using Better.UISystem.Runtime.PopupsSystem.Interfaces;
 using Better.UISystem.Runtime.PopupsSystem.Popups;
 using Better.UISystem.Runtime.PopupsSystem.Transitions;
@@ -16,16 +14,16 @@ using Random = UnityEngine.Random;
 namespace Better.UISystem.Runtime
 {
     [Serializable]
-    public abstract class InternalPopupSystem<TDerived, TDerivedPopup> : IPopupTransitionRunner, IPopupSystem<TDerived, TDerivedPopup>
+    public abstract class InternalPopupSystem<TDerived, TDerivedPopup, TDerivedModel> : IPopupTransitionRunner, IPopupSystem<TDerived, TDerivedPopup, TDerivedModel>
         where TDerived : IPopup
         where TDerivedPopup : Popup, TDerived
+        where TDerivedModel : PopupModel
     {
         private Dictionary<Type, TDerivedPopup> _popupPrefabMap;
         private TDerived _openedPopup;
         private PopupTransitionInfo _currentTransition;
         private TaskCompletionSource<TDerived> _transitionSource;
         private SortedList<int, OpenPopupTransitionInfo> _scheduledTransitions;
-        private readonly PopupSystemSettings _settings;
 
         public RectTransform Container { get; private set; }
         public bool HasOpened => _openedPopup != null;
@@ -35,7 +33,6 @@ namespace Better.UISystem.Runtime
         {
             Container = container;
             _scheduledTransitions = new();
-            _settings = PopupSystemSettings.Instance;
             PlayerLoopUtility.SubscribeToLoop<PostLateUpdate>(LateUpdate);
             CreatePopupPrefabMap();
         }
@@ -49,15 +46,15 @@ namespace Better.UISystem.Runtime
 
         protected abstract void OnScheduleRemoved<TTransitionInfo>(TTransitionInfo info) where TTransitionInfo : PopupTransitionInfo;
 
-        protected abstract void OnOpened(IPopup openedPopup);
+        protected abstract void OnOpened(TDerived openedPopup);
 
-        protected abstract Dictionary<Type, TDerivedPopup> GetPrefabs();
+        protected abstract TDerivedPopup[] GetPrefabs();
 
         private void CreatePopupPrefabMap()
         {
             _popupPrefabMap = new();
 
-            foreach (var popup in GetPrefabs().Values)
+            foreach (var popup in GetPrefabs())
             {
                 if (EqualityComparer<TDerivedPopup>.Default.Equals(popup, null))
                 {
@@ -91,8 +88,8 @@ namespace Better.UISystem.Runtime
 
         public ForcePopupTransitionInfo<TPresenter, TModel> CreateForceTransition<TPresenter, TModel>(TModel model,
             CancellationToken cancellationToken = default)
-            where TPresenter : Popup<TModel>
-            where TModel : PopupModel
+            where TPresenter : Popup<TModel>, TDerived
+            where TModel : TDerivedModel
         {
             var transition = new ForcePopupTransitionInfo<TPresenter, TModel>(this, model, cancellationToken);
 
@@ -101,8 +98,8 @@ namespace Better.UISystem.Runtime
 
         public SchedulePopupTransitionInfo<TPresenter, TModel> CreateScheduleTransition<TPresenter, TModel>(TModel model,
             CancellationToken cancellationToken = default)
-            where TPresenter : Popup<TModel>
-            where TModel : PopupModel
+            where TPresenter : Popup<TModel>, TDerived
+            where TModel : TDerivedModel
         {
             var transition = new SchedulePopupTransitionInfo<TPresenter, TModel>(this, model, cancellationToken);
 
@@ -244,15 +241,7 @@ namespace Better.UISystem.Runtime
             Debug.Log(outMessage);
         }
 
-        private PopupsSequence GetTransitionSequence(PopupTransitionInfo info)
-        {
-            if (!info.OverridenSequence || !_settings.TryGetOverridenSequence(info.SequenceType, out var sequence))
-            {
-                sequence = _settings.GetDefaultSequence();
-            }
-
-            return sequence;
-        }
+        protected abstract PopupsSequence GetTransitionSequence(PopupTransitionInfo info);
 
         private bool TryPopScheduledTransition(out PopupTransitionInfo transitionInfo)
         {

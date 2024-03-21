@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace Better.UISystem.Runtime.PopupsSystem.Popups
+﻿namespace Better.UISystem.Runtime.PopupsSystem.Popups
 {
     //TODO: If popup removed from queue - set default result
     public abstract class PendingPopupModel<TResult> : PopupModel

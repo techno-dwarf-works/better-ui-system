@@ -1,34 +1,27 @@
 ﻿using System;
-using Better.Attributes.Runtime;
 using Better.Attributes.Runtime.Manipulation;
 using Better.Attributes.Runtime.Select;
-using Better.Extensions.Runtime;
-using Better.Internal.Core.Runtime;
 using Better.ProjectSettings.Runtime;
-using Better.Singletons.Runtime.Attributes;
-using Better.UISystem.Runtime.PopupsSystem.Popups;
-using UnityEditor;
 using UnityEngine;
 
 namespace Better.UISystem.Runtime.PopupsSystem
 {
-    [ScriptableCreate(Path)]
-    public class PopupSystemSettings : ScriptableSettings<PopupSystemSettings>
+    public abstract class PopupSystemSettings<TSettings, TDerived, TSequence> : ScriptableSettings<TSettings> 
+        where TSettings : ScriptableSettings<TSettings>
     {
-        public const string Path = PrefixConstants.BetterPrefix + "/" + "Popups System";
-        private readonly PopupsSequence _fallbackSequence = new SimplePopupsSequence();
-
         [Header("SETUP")] [Select] [SerializeReference]
-        private PopupsSequence _defaultSequence = new SimplePopupsSequence();
+        private TSequence _defaultSequence;
 
-        [Select] [SerializeReference] private PopupsSequence[] _overridenSequences;
+        [Select] [SerializeReference] private TSequence[] _overridenSequences;
 
         [Header("SCREENS")] [SerializeField, ReadOnly]
-        private Popup[] _popupPrefabs;
+        protected TDerived[] _prefabs;
 
-        public Popup[] PopupPrefabs => _popupPrefabs;
+        public TDerived[] Prefabs => _prefabs;
 
-        public bool TryGetOverridenSequence(Type sequenceType, out PopupsSequence sequence)
+        public abstract TSequence FallbackSequence { get; }
+
+        public bool TryGetOverridenSequence(Type sequenceType, out TSequence sequence)
         {
             if (sequenceType != null)
             {
@@ -42,37 +35,21 @@ namespace Better.UISystem.Runtime.PopupsSystem
                 }
             }
 
-            sequence = null;
+            sequence = default;
             return false;
         }
 
-        public PopupsSequence GetDefaultSequence()
+        public TSequence GetDefaultSequence()
         {
             if (_defaultSequence == null)
             {
-                var message = $"{nameof(_defaultSequence)} is null, returned {nameof(_fallbackSequence)}({_fallbackSequence})";
+                var message = $"{nameof(_defaultSequence)} is null, returned {nameof(FallbackSequence)}({FallbackSequence})";
                 Debug.LogWarning(message);
 
-                return _fallbackSequence;
+                return FallbackSequence;
             }
 
             return _defaultSequence;
         }
-
-        #region Editor
-
-#if UNITY_EDITOR
-
-        [EditorButton("CACHE PREFABS")]
-        private void CacheScreenPrefabsEditor()
-        {
-            var serializedObject = new SerializedObject(this);
-            _popupPrefabs = AssetDatabaseUtility.FindPrefabsOfType<Popup>();
-            EditorUtility.SetDirty(this);
-            serializedObject.ApplyModifiedProperties();
-        }
-#endif
-
-        #endregion
     }
 }

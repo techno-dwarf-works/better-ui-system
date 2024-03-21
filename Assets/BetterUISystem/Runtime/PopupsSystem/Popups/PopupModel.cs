@@ -1,6 +1,6 @@
 ﻿namespace Better.UISystem.Runtime.PopupsSystem.Popups
 {
-    public class PopupModel
+    public abstract class PopupModel
     {
     }
 }

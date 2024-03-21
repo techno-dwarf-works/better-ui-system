@@ -1,11 +1,8 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using Better.UISystem.Runtime.ScreensSystem.Interfaces;
 using Better.UISystem.Runtime.ScreensSystem.Screens;
 using Better.UISystem.Runtime.ScreensSystem.Transitions;
 using UnityEngine;
-using UnityEngine.UI;
-using Object = UnityEngine.Object;
 
 namespace Better.UISystem.Runtime.ScreensSystem
 {
@@ -14,27 +11,9 @@ namespace Better.UISystem.Runtime.ScreensSystem
         private readonly InternalScreenSystem _internalSystem;
         private RectTransform _rectTransform;
 
-        public ScreenSystem()
+        public ScreenSystem(RectTransform container)
         {
-            var container = FindOrCreateCanvas();
             _internalSystem = new InternalScreenSystem(container);
-        }
-
-        private RectTransform FindOrCreateCanvas()
-        {
-            var canvas = Object.FindObjectOfType<Canvas>();
-            if (canvas != null)
-            {
-                return canvas.GetComponent<RectTransform>();
-            }
-
-            var canvasComponents = new Type[]
-            {
-                typeof(RectTransform), typeof(Canvas), typeof(CanvasRenderer), typeof(CanvasScaler)
-            };
-
-            var systemGameObject = new GameObject(nameof(ScreenSystem), canvasComponents);
-            return systemGameObject.GetComponent<RectTransform>();
         }
 
         #region IScreenSystem

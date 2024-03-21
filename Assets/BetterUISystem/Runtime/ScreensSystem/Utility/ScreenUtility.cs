@@ -6,70 +6,48 @@ using Better.UISystem.Runtime.ScreensSystem.Screens;
 
 namespace Better.UISystem.Runtime.ScreensSystem.Utility
 {
-    public static class ScreenUtility
+    public static class ScreenSystemExtensions
     {
-#if BETTER_SERVICES && BETTER_LOCATOR
-        private static readonly Locators.Runtime.ServiceProperty<ScreenService> _serviceProperty = new();
-#endif
-
-        public static IScreenSystem GetSystem()
-        {
-#if BETTER_SERVICES && BETTER_LOCATOR
-            if (_serviceProperty.IsRegistered)
-            {
-                return _serviceProperty.CachedService;
-            }
-#endif
-
-#if BETTER_SINGLETONS
-            return ScreenManager.Instance;
-#endif
-
-#pragma warning disable CS0162
-            return new ScreenSystem();
-#pragma warning restore CS0162
-        }
-        
-        public static bool IsOpened<TPresenter, TModel>()
+        public static bool IsOpened<TPresenter, TModel>(this IScreenSystem self)
             where TPresenter : Screen<TModel>
             where TModel : ScreenModel
         {
-            return GetSystem().IsOpened<TPresenter, TModel>();
+            return self.IsOpened<TPresenter, TModel>();
         }
 
-        public static bool TryGetOpened<TPresenter, TModel>(out TPresenter screen)
+        public static bool TryGetOpened<TPresenter, TModel>(this IScreenSystem self, out TPresenter screen)
             where TPresenter : Screen<TModel>
             where TModel : ScreenModel
         {
-            return GetSystem().TryGetOpened<TPresenter, TModel>(out screen);
+            return self.TryGetOpened<TPresenter, TModel>(out screen);
         }
 
-        public static Task<TPresenter> OpenAsync<TPresenter, TModel>(TModel model, CancellationToken cancellationToken = default)
+        public static Task<TPresenter> OpenAsync<TPresenter, TModel>(this IScreenSystem self, TModel model, CancellationToken cancellationToken = default)
             where TPresenter : Screen<TModel>
             where TModel : ScreenModel
         {
-            return GetSystem()
+            return self
                 .CreateTransition<TPresenter, TModel>(model, cancellationToken)
                 .RunAsync();
         }
 
-        public static void Open<TPresenter, TModel>(TModel model)
+        public static void Open<TPresenter, TModel>(this IScreenSystem self, TModel model)
             where TPresenter : Screen<TModel>
             where TModel : ScreenModel
         {
-            OpenAsync<TPresenter, TModel>(model).Forget();
+            self.OpenAsync<TPresenter, TModel>(model).Forget();
         }
 
-        public static Task OpenHistoryAsync(int historyDepth = 1, CancellationToken cancellationToken = default)
+        public static Task OpenHistoryAsync(this IScreenSystem self, int historyDepth = 1, CancellationToken cancellationToken = default)
         {
-            return GetSystem()
+            return self
                 .CreateHistoryTransition(historyDepth, cancellationToken)
                 .RunAsync();
         }
 
-        public static void OpenHistory(int historyDepth = 1, CancellationToken cancellationToken = default)
+        public static void OpenHistory(this IScreenSystem self, int historyDepth = 1, CancellationToken cancellationToken = default)
         {
-            OpenHistoryAsync(historyDepth, cancellationToken).Forget();
+            OpenHistoryAsync(self, historyDepth, cancellationToken).Forget();
         }
     }
 }

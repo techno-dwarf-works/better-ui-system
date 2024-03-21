@@ -18,19 +18,19 @@ namespace Samples.TestSamples.ScreensSystem.Scripts
         [EditorButton(captureGroup: 1)]
         private void OpenScreen()
         {
-            ScreenUtility.Open<TestScreen, TestModel>(new TestModel());
+            //ScreenSystemExtensions.Open<TestScreen, TestModel>(new TestModel());
         }
 
         [EditorButton(captureGroup: 1)]
         private void OpenScreenA()
         {
-            ScreenUtility.Open<TestScreenA, TestModelA>(new TestModelA());
+            //ScreenSystemExtensions.Open<TestScreenA, TestModelA>(new TestModelA());
         }
 
         [EditorButton(captureGroup: 1)]
         private void OpenScreenB()
         {
-            ScreenUtility.Open<TestScreenB, TestModelB>(new TestModelB());
+            //ScreenSystemExtensions.Open<TestScreenB, TestModelB>(new TestModelB());
         }
 
         [EditorButton(captureGroup: 2)]
@@ -38,13 +38,13 @@ namespace Samples.TestSamples.ScreensSystem.Scripts
         {
             var historyDepth = Random.Range(1, 6);
 
-            ScreenUtility.OpenHistory(historyDepth);
+           // ScreenSystemExtensions.OpenHistory(historyDepth);
         }
 
         [EditorButton(captureGroup: 2)]
         private void OpenHistoryScreenFromCount()
         {
-            ScreenUtility.OpenHistory(_historyDepth);
+           // ScreenSystemExtensions.OpenHistory(_historyDepth);
         }
     }
 }

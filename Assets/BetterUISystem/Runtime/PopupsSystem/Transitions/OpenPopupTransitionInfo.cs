@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using Better.UISystem.Runtime.Common;
 using Better.UISystem.Runtime.PopupsSystem.Interfaces;
 using Better.UISystem.Runtime.PopupsSystem.Popups;

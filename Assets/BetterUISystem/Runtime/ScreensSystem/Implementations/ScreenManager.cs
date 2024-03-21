@@ -9,7 +9,6 @@ using UnityEngine;
 namespace Better.UISystem.Runtime.ScreensSystem
 {
     [RequireComponent(typeof(RectTransform))]
-    [DefaultExecutionOrder(-999)]
     public class ScreenManager : MonoSingleton<ScreenManager>, IScreenSystem
     {
         private IScreenSystem _internalSystem;
